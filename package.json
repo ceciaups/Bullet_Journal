@@ -1,0 +1,29 @@
+{
+  "name": "bullet_journal",
+  "version": "1.0.0",
+  "description": "Online Bullet Journal",
+  "main": "api/index.js",
+  "scripts": {
+    "dev": "nodemon api/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ceciaups/Bullet_Journal.git"
+  },
+  "author": "Ceci Pui Sze Au",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ceciaups/Bullet_Journal/issues"
+  },
+  "homepage": "https://github.com/ceciaups/Bullet_Journal#readme",
+  "dependencies": {
+    "crypto-js": "^4.1.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongodb": "^5.5.0",
+    "mongoose": "^7.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
