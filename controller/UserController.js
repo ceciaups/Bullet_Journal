@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const CryptoJS = require("crypto-js");
 const User = require("../model/User");
 
-async function getUsers(req, res, next) {
+async function getUser(req, res, next) {
   try {
     let id = req.query.id;
     let data = {
@@ -63,7 +63,7 @@ async function deleteUser(req, res, next) {
 }
 
 module.exports = {
-  getUsers,
+  getUser,
   addUser,
   editUser,
   deleteUser

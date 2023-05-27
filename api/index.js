@@ -8,11 +8,14 @@ const dbUrl = `mongodb+srv://admin:${process.env.MONGO_PASSWORD}@cluster0.s6sn6b
 mongoose.connect(dbUrl);
 
 const User = require('../model/User');
+const User = require('../model/Journal');
 
 const app = express();
 app.use(express.json());
 app.use(express.static(__dirname + "/../"));
+
 app.use("/user", require("../route/user"));
+app.use("/journal", require("../route/journal"));
 
 const httpServer = http.createServer(app);
 

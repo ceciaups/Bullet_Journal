@@ -1,11 +1,11 @@
 var express = require("express");
 var router = express.Router();
 const User = require("../model/User");
-const { getUsers, addUser, editUser, deleteUser } = require('../controller/UserController');
+const { getUser, addUser, editUser, deleteUser } = require('../controller/UserController');
 
 // User
 router.get("/", async (req, res, next) => {
-  result = await getUsers(req, res, next);
+  result = await getUser(req, res, next);
   res.send(result);
 });
 
