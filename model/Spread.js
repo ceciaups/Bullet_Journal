@@ -2,8 +2,8 @@ const { Schema, model } = require("mongoose");
 
 const spreadSchema = new Schema(
   {
-    spread_type_id: Number,
-    journal_id: Number,
+    spread_type_id: Schema.Types.ObjectId,
+    journal_id: Schema.Types.ObjectId,
     spread_name: String,
     order: Number
   }, 

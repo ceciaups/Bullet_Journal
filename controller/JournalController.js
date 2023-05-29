@@ -29,9 +29,9 @@ async function addJournal(req, res, next) {
 
 async function deleteJournal(req, res, next) {
   try {
-    let userId = req.body.userId;
+    let id = req.query.id;
     let data = {
-      user_id: userId
+      _id: id
     }
     return await Journal.deleteOne(data);
   }

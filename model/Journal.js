@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const journalSchema = new Schema(
   {
-    user_id: Number
+    user_id: Schema.Types.ObjectId
   }, 
   { collection: "Journal" }
 );
