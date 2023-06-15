@@ -1,16 +1,9 @@
-import logo from '/logo.png'
-import hero from '/home/hero.jpg'
 import './Home.css'
 
-function Home() {
+export default function Home() {
   return (
     <>
-      <header>
-        <a href="/">
-          <img src={logo} className="logo" alt="logo" />
-        </a>
-      </header>
-      <div className="hero">
+      <main className="hero">
         <div className="hero-image">
           <h1>Bullet Journal</h1>
           <div>
@@ -18,9 +11,7 @@ function Home() {
             <a href="/signin" className="button">Sign In</a>
           </div>
         </div>
-      </div>
+      </main>
     </>
   )
 }
-
-export default Home

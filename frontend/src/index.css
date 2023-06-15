@@ -81,6 +81,10 @@ h1 {
 /* 2. HEADER STYLES */
 header {
   height: var(--header-height);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  justify-items: center;
 }
 
 .logo {
