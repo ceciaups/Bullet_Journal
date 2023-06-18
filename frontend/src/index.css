@@ -2,10 +2,12 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  color: var(--dark-green);
+  background-color: #FFFFFF;
 
-  color-scheme: light dark;
+  /* color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: var(--dark-green);
+  background-color: var(--dark-green); */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -87,11 +89,15 @@ header {
   justify-items: center;
 }
 
-.logo {
+.header-icon {
   height: 100%;
+  width: var(--header-height);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-@media (prefers-color-scheme: light) {
+/* @media (prefers-color-scheme: light) {
   :root {
     color: var(--dark-green);
     background-color: var(--white);
@@ -102,4 +108,4 @@ header {
   button {
     background-color: var(--white);
   }
-}
+} */

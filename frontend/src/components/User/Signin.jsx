@@ -1,8 +1,10 @@
+import Header from '../../components/Header'
 import './User.css'
 
 export default function Signin() {
   return (
-    <>
+    <div id="user">
+      <Header />
       <main>
         <h1>Sign In</h1>
         <form action="#" id="form-signin" name="form-signin">
@@ -16,6 +18,6 @@ export default function Signin() {
           </div>
         </form>
       </main>
-    </>
+    </div>
   )
 }

@@ -1,8 +1,10 @@
+import Header from '../../components/Header'
 import './User.css'
 
 export default function Login() {
   return (
-    <>
+    <div id="user">
+      <Header />
       <main>
         <h1>Log In</h1>
         <form action="#" id="form-login" name="form-login">
@@ -16,6 +18,6 @@ export default function Login() {
           </div>
         </form>
       </main>
-    </>
+    </div>
   )
 }

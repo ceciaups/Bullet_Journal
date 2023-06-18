@@ -1,0 +1,23 @@
+#journal #journal-nav {
+  height: 100vh;
+  background: var(--dark-green);
+}
+
+#book {
+  margin: 1em 2em 1em calc(2em + var(--header-height));
+  width: calc(100vw - var(--header-height) - 4em);
+  height: calc(100vh - var(--header-height) - 2em);
+  background-color: var(--white);
+  border-radius: 1em;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+#left-page, #right-page {
+  height: 100%;
+  width: 50%;
+}
+
+#left-page {
+  border-right: 2px solid var(--dark-green);
+}

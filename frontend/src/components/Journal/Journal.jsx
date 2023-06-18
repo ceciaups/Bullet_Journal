@@ -1,17 +1,14 @@
+import Header from '../../components/Header'
 import './Journal.css'
 
 export default function Journal() {
   return (
-    <>
-      <main className="journal">
-        <div className="hero-image">
-          <h1>Journal</h1>
-          <div>
-            <a href="/login" className="button">Log In</a>
-            <a href="/signin" className="button">Sign In</a>
-          </div>
-        </div>
+    <div id="journal">
+      <Header />
+      <main id="book">
+        <div id="left-page"></div>
+        <div id="right-page"></div>
       </main>
-    </>
+    </div>
   )
 }
