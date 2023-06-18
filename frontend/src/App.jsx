@@ -7,14 +7,12 @@ import Journal from './components/Journal/Journal'
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Home />}></Route>
-        <Route path='/login' element={<Login />}></Route>
-        <Route path='/signin' element={<Signin />}></Route>
-        <Route path='/journal' element={<Journal />}></Route>
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path='/' element={<Home />}></Route>
+      <Route path='/login/*' element={<Login />}></Route>
+      <Route path='/signin/*' element={<Signin />}></Route>
+      <Route path='/journal/*' element={<Journal />}></Route>
+    </Routes>
   )
 }
 
