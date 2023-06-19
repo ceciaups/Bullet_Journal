@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(express.static(__dirname + "/../"));
 app.use(
   cors({
-    origin: "http://bullet-journal.ceciaups.com"
+    origin: "https://bullet-journal.ceciaups.com"
   })
 );
 
