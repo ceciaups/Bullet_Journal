@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import Header from '../../components/Header'
 import './User.css'
 
-export default function Login() {
+export default function Login(props) {
 
   const navigate = useNavigate();
 
@@ -18,10 +18,19 @@ export default function Login() {
       })
     }
 
-    const res = await fetch("https://bullet-journal-db.ceciaups.com/user/add", option)
+    const res = await fetch("https://bullet-journal-db.ceciaups.com/user/check", option)
 
-    if (res.status === 200)
-      navigate("/journal")
+    if (res.status === 200) {
+      const result = await res.json();
+      
+      if (Object.keys(result).length) {
+        props.setUser(result._id)
+        navigate("/journal")
+      }
+    }
+    else {
+      navigate("/error")
+    }
   }
 
   return (
