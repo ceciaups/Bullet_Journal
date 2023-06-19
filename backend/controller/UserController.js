@@ -4,11 +4,41 @@ const User = require("../model/User");
 
 async function getUser(req, res, next) {
   try {
-    let id = req.query.id;
+    let email = req.body.email;
     let data = {
-      _id: id
+      email: email
     }
-    return await User.findOne(data);
+
+    let result = await User.findOne(data);
+    
+    if (result) {
+      return result;
+    }
+    else {
+      return { error: 'User does not exist' };
+    }
+  }
+  catch (e) {
+    next(e);
+  }
+}
+
+async function checkUser(req, res, next) {
+  try {
+    let email = req.body.email;
+    let password = CryptoJS.MD5(req.body.password).toString();
+    let data = {
+      email: email
+    }
+
+    let result = await User.findOne(data);
+
+    if (result) {
+      if (result.password == password) {
+        return result;
+      }
+    }
+    return new Error();
   }
   catch (e) {
     next(e);
@@ -64,6 +94,7 @@ async function deleteUser(req, res, next) {
 
 module.exports = {
   getUser,
+  checkUser,
   addUser,
   editUser,
   deleteUser
