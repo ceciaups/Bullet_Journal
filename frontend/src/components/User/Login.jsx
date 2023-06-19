@@ -18,7 +18,7 @@ export default function Login() {
       })
     }
 
-    const res = await fetch("http://bullet-journal-db.ceciaups.com/user/add", option)
+    const res = await fetch("https://bullet-journal-db.ceciaups.com/user/add", option)
 
     if (res.status === 200)
       navigate("/journal")
