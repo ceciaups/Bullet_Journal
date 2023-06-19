@@ -18,7 +18,7 @@ export default function Login() {
       })
     }
 
-    const res = await fetch("http://localhost/user/add", option)
+    const res = await fetch("http://bullet-journal-db.ceciaups.com/user/add", option)
 
     if (res.status === 200)
       navigate("/journal")
@@ -33,8 +33,6 @@ export default function Login() {
           <div className="form-input">
             <label>Email:</label>
             <input type="text" id="form-email" className="form-content" name="femail" placeholder="Email"></input>
-          </div>
-          <div className="form-input">
             <label>Password:</label>
             <input type="password" id="form-password" className="form-content" name="fpassword" placeholder="Password"></input>
           </div>
