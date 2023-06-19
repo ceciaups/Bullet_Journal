@@ -10,8 +10,8 @@ export default function Home() {
         <div className="hero-image">
           <h1>Bullet Journal</h1>
           <div>
-            <Link to="login" className="button">Log In</Link>
-            <Link to="signin" className="button">Sign In</Link>
+            <Link to="signin" className="button" id="hero-signin">Sign In</Link>
+            <Link to="login" className="button" id="hero-login">Log In</Link>
           </div>
         </div>
       </main>

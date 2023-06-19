@@ -5,3 +5,26 @@
 #user #nav-bar {
   visibility: hidden;
 }
+
+#form-signin, #form-login {
+  margin: 0.5em auto;
+  width: 50vw;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.5em;
+  align-items: center;
+}
+
+.form-input {
+  align-items: center;
+  text-align: left;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5em;
+}
+
+input {
+  background-color: var(--white);
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+}
