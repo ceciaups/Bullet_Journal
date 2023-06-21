@@ -11,7 +11,7 @@ function Header(props) {
   const [status, setStatus] = useState([]);
 
   useEffect (() => {
-    if (props.user || testing) {
+    if (props.user) {
       async function getJournal() {
         const resJournal = await fetch("https://bullet-journal-db.ceciaups.com/journal?userId=" + props.user);
         if (resJournal.status === 200) {
