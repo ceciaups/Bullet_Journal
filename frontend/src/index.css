@@ -23,7 +23,13 @@
   --green-400: #414833;
   --green-500: #333D29;
   --orange: #D08644;
+  --brown-100: #b6ad90;
+  --brown-200: #a68a64;
+  --brown-300: #936639;
+  --brown-400: #7f4f24;
+  --brown-500: #582f0e;
   --white: #FCF6F6;
+  --white-50: #FCF6F660;
 }
 
 /* 1. GENERAL STYLES */
@@ -60,6 +66,9 @@ h2 {
   font-size: 2.5em;
 }
 h3 {
+  font-size: 2em;
+}
+h4 {
   font-size: 1.5em;
 }
 
@@ -122,6 +131,7 @@ header {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
+  color: var(--white);
   background-color: var(--green-500);
   cursor: pointer;
 }

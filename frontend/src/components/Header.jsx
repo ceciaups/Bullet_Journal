@@ -11,7 +11,7 @@ function Header(props) {
   const [status, setStatus] = useState([]);
 
   useEffect (() => {
-    if (props.user) {
+    if (props.user || testing) {
       async function getJournal() {
         const resJournal = await fetch("https://bullet-journal-db.ceciaups.com/journal?userId=" + props.user);
         if (resJournal.status === 200) {
@@ -42,9 +42,17 @@ function Header(props) {
     <header>
       <ul id="journal-nav">
         {props.spreads?.map(spread => (
-          <li key={spread._id}><button className="journal-button" onClick={() => changeSpread(spread)}>{spread.spread_type_id.spread_type_icon}</button></li>
+          <li key={spread._id}>
+            <button className="journal-button" onClick={() => changeSpread(spread)}>
+              {spread.spread_type_id.spread_type_icon}
+            </button>
+          </li>
         ))}
-        <li id="journal-add" className="journal-button">{add}</li>
+        <li id="journal-add" className="journal-button">
+          <button className="journal-button" onClick={() => props.activatePanel({})}>
+            {add}
+          </button>
+        </li>
       </ul>
       <Link to="/" id="logo">
         <img src={logo} className="header-icon" alt="logo" />

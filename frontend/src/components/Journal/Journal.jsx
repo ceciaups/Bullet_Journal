@@ -1,16 +1,31 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import Header from '../../components/Header'
 import './Journal.css'
 
 export default function Journal(props) {
+  const [isActive, setIsActive] = useState(false);
+  const [id, setId] = useState("");
+  const [item, setItem] = useState({});
+  const [items, setItems] = useState([]);
+  const [spreadId, setSpreadId] = useState("");
   const [spread, setSpread] = useState({});
   const [spreads, setSpreads] = useState([]);
-  const [pages, setPages] = useState([]);
+  const [text, setText] = useState([]);
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const navigate = useNavigate();
+
+  const add = <FontAwesomeIcon icon={faPlus} size="2x" />;
+  const edit = <FontAwesomeIcon icon={faPenToSquare} size="2x" />;
 
   useEffect (() => {
     async function getSpread() {
-      if (!spread) {}
+      if (!props.user) {
+        navigate("/login")
+      }
+      if (Object.keys(spread).length === 0) {}
       else if (spread.spread_type_id.spread_type_name === "Yearly Log") {
         const res = await fetch("https://bullet-journal-db.ceciaups.com/yearspread?id=" + spread._id);
         const result = await res.json();
@@ -43,41 +58,149 @@ export default function Journal(props) {
 
           let pages = [];
           let sections = [];
-          pages.push(<h3 key="year-heading">Year Log</h3>);
+          pages.push(
+            <div key="year-heading" id="year-heading">
+              <h3>Year Log</h3>
+              <button id="year-add" className="button" onClick={() => activatePanel({})}>{add}</button>
+            </div>
+          );
           for (let i = 0; i < 12; i++) {
             let des = [];
             descriptions[i].forEach(description => {
               des.push(
-                <p key={description._id}>{description.day}: {description.description}</p>
+                <button key={description._id} id={description._id} className="year-item" onClick={(e) => activatePanel(e)}>{description.day}: {description.description}</button>
               )
             });
             sections.push(
               <div key={months[i]} className="year-month">
-                <h3 className="year-title">{months[i]}</h3>
+                <h4 className="year-title">{months[i]}</h4>
                 <div className="year-description">
                   {des}
-                  {/* <form action="#" className="form-year" name="form-year">
-                    <input type="text" className="year-input" name="fdes" placeholder=""></input>
-                    <button type="submit" className="button">Add</button>
-                  </form> */}
                 </div>
               </div>
             );
           }
           pages.push(<div key="year-content" id="year-content">{sections}</div>)
-          setPages(pages);
+          setText(pages);
+          setItems(result);
+          setSpreadId(spread._id);
         }
       }
     }
     getSpread();
-  }, [spread]);
+  }, [spreadId, spread, items]);
+
+  useEffect (() => {
+    async function getItem() {
+      if (id) {
+        const curItem = items.find((item) => {
+          return item._id === id;
+        })
+        setItem(curItem);
+      }
+      else {
+        setItem({});
+      }
+    }
+    getItem();
+  }, [id]);
+
+  function activatePanel(e){
+    if (Object.keys(e).length != 0) {
+      setId(e.currentTarget.id);
+    }
+    else {
+      setId("");
+    }
+    setIsActive(true);
+  }
+
+  function deactivatePanel(){
+    setIsActive(false);
+  }
+
+  async function addItem(e) {
+    e.preventDefault();
+
+    console.log(item);
+    const option = {
+      method: "POST",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        "spreadId": spread._id,
+        "month": e.target.fmonth.value,
+        "day": e.target.fday.value,
+        "description": e.target.fdes.value,
+        "order": 1
+      })
+    }
+
+    const res = await fetch("https://bullet-journal-db.ceciaups.com/yearspread/add", option)
+    const result = await res.json();
+
+    if (res.status === 200){
+      const res = await fetch("https://bullet-journal-db.ceciaups.com/yearspread?id=" + spread._id);
+      const result = await res.json();
+      if (res.status === 200){
+        setItems(result);
+      }
+      setId("");
+      deactivatePanel();
+    }
+    else {
+      navigate("/error")
+    }
+  }
+
+  async function updateItem(e) {
+    e.preventDefault()
+
+    const option = {
+      method: "POST",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        "spreadId": id,
+        "month": e.target.fmonth.value,
+        "day": e.target.fday.value,
+        "description": e.target.fdes.value,
+        "order": 1
+      })
+    }
+
+    // const res = await fetch("https://bullet-journal-db.ceciaups.com/yearspread/add", option)
+    const res = await fetch("https://bullet-journal-db.ceciaups.com/yearspread/add", option)
+    const result = await res.json();
+
+    if (res.status === 200){
+      deactivatePanel();
+    }
+    else {
+      navigate("/error")
+    }
+  }
 
   return (
     <div id="journal">
-      <Header user={props.user} spreads={spreads} setSpreads={setSpreads} setSpread={setSpread} />
+      <Header user={props.user} spreads={spreads} setSpreads={setSpreads} setSpread={setSpread} activatePanel={activatePanel}/>
       <main id="book">
-        <div id="page">{pages}</div>
+        <div id="page">{text}</div>
       </main>
+      <div className={isActive ? "editPanel" : "hide"}>
+        <form action="#" id="form-year" name="form-year" onSubmit={(e) => addItem(e)}>
+          <div className="form-input">
+            <label>Month:</label>
+            <input type="number" id="form-month" className="form-content" name="fmonth" min={1} max={12} value={item.month}></input>
+            <label>Day:</label>
+            <input type="number" id="form-day" className="form-content" name="fday" min={1} max={31} value={item.day}></input>
+            <label>Description:</label>
+            <input type="text" id="form-des" className="form-content" name="fdes" value={item.description}></input>
+          </div>
+          <div className="form-button">
+            <button type="submit" className="button">{item ? "Update" : "Add"}</button>
+            <button type="reset" className="button" onClick={() => deactivatePanel()}>Cancel</button>
+          </div>
+        </form>
+      </div>
     </div>
   )
 }

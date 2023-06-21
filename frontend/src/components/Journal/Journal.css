@@ -3,6 +3,10 @@
   background: var(--green-500);
 }
 
+#journal {
+  height: 100vh;
+}
+
 #book {
   margin: 2em 2em 2em calc(2em + var(--header-height));
   width: calc(100vw - var(--header-height) - 4em);
@@ -14,11 +18,37 @@
 }
 
 #page {
+  position: relative;
   height: 100%;
   width: 100%;
-  padding: 0.5em 1em;
+  padding: 0.5em 0;
+}
+#page::before {
+  content: '';
+  position: absolute;
+  width: 2px;
+  background-color: var(--green-500);
+  top: 0;
+  bottom: 0;
+  left: calc(50% - 1px);
 }
 
+#year-add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--header-height);
+  width: var(--header-height);
+  padding: auto;
+}
+
+#year-heading {
+  padding: 0 1em;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
 #year-content {
   height: calc(100% - 36px);
   width: 100%;
@@ -26,20 +56,67 @@
   grid-template-columns: repeat(2, 1fr);
   text-align: left;
 }
+.year-description {
+  justify-content: flex-start;
+}
+.year-item {
+  width: auto;
+  font-weight: 500;
+  text-align: left;
+  color: var(--green-500);
+  text-decoration: inherit;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--white);
+  cursor: pointer;
+}
+.year-item:hover {
+  background-color: var(--orange);
+}
 .year-month {
+  padding: 0 1em;
   display: flex;
   flex-flow: row nowrap;
   gap: 1em;
-}
-.form-year {
-  display: flex;
-  flex-flow: row nowrap;
 }
 .year-input {
   border: 1px solid var(--orange);
   width: 100px;
 }
+.year-description {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.5em;
+}
 
-/* #left-page {
-  border-right: 2px solid var(--green-500);
-} */
+.editPanel {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--white-50);
+}
+#form-year {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1em;
+  padding: 1em;
+  width: 50%;
+  background-color: var(--green-100);
+  border: 2px solid var(--green-400);
+  border-radius: 1em;
+  padding: auto;
+}
+.form-button {
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+}
+
+.hide {
+  display: none;
+}
