@@ -16,7 +16,7 @@ function App() {
       <Route path='/' element={<Home />}></Route>
       <Route path='/login/*' element={<Login setUser={setUser} setToken={setToken} />}></Route>
       <Route path='/signup/*' element={<Signup setUser={setUser} setToken={setToken} />}></Route>
-      <Route path='/journal/*' element={<Journal />}></Route>
+      <Route path='/journal/*' element={<Journal user={user} />}></Route>
       <Route path='/error/*' element={<Error />}></Route>
     </Routes>
   )

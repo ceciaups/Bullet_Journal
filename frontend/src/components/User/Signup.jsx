@@ -7,7 +7,7 @@ export default function Signup(props) {
   const navigate = useNavigate();
 
   async function userSignup(e) {
-    e.preventDefault();
+    e.preventDefault()
 
     const option = {
       method: "POST",
@@ -19,17 +19,31 @@ export default function Signup(props) {
     }
 
     // Find whether the user exists
-    const res = await fetch("https://bullet-journal-db.ceciaups.com/user", option)
-    const result = await resCheck.json();
+    const resCheck = await fetch("https://bullet-journal-db.ceciaups.com/user", option)
+    const result = await resCheck.json()
 
     if (result.error) {
       // Create user if not exist
       const res = await fetch("https://bullet-journal-db.ceciaups.com/user/add", option)
-      const result = await res.json();
+      const result = await res.json()
 
       if (res.status === 200){
-        props.setUser(result._id)
-        navigate("/journal")
+        const optionJournal = {
+          method: "POST",
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            "userId": result._id
+          })
+        }
+        const resJournal = await fetch("https://bullet-journal-db.ceciaups.com/journal/add", optionJournal)
+        
+        if (resJournal.status === 200) {
+          props.setUser(result._id)
+          navigate("/journal")
+        }
+        else {
+          navigate("/error")
+        }
       }
       else {
         navigate("/error")

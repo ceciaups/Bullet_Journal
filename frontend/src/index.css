@@ -2,12 +2,12 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color: var(--dark-green);
+  color: var(--green-500);
   background-color: #FFFFFF;
 
   /* color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: var(--dark-green); */
+  background-color: var(--green-500); */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -17,7 +17,11 @@
 
   --header-height: 50px;
 
-  --dark-green: #333D29;
+  --green-100: #c2c5aa;
+  --green-200: #a4ac86;
+  --green-300: #656d4a;
+  --green-400: #414833;
+  --green-500: #333D29;
   --orange: #D08644;
   --white: #FCF6F6;
 }
@@ -40,6 +44,7 @@ body {
   padding: 0;
   border: 0;
   outline: 0;
+  transition: all 0.25s;
 }
 
 #root {
@@ -53,6 +58,9 @@ h1 {
 }
 h2 {
   font-size: 2.5em;
+}
+h3 {
+  font-size: 1.5em;
 }
 
 .button {
@@ -94,9 +102,39 @@ header {
   align-items: center;
 }
 
+#journal-nav {
+  width: var(--header-height);
+  color: var(--white);
+  display: flex;
+  flex-flow: column nowrap;
+}
+#journal-nav li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--header-height);
+}
+.journal-button {
+  font-weight: 500;
+  text-decoration: inherit;
+  width: 100%;
+  height: 100%;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--green-500);
+  cursor: pointer;
+}
+.journal-button:hover {
+  background-color: var(--green-300);
+}
+#journal-add {
+  border-top: 1px solid var(--white);
+}
+
 /* @media (prefers-color-scheme: light) {
   :root {
-    color: var(--dark-green);
+    color: var(--green-500);
     background-color: var(--white);
   }
   a:hover {
