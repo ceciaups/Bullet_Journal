@@ -70,7 +70,7 @@ export default function Signup(props) {
             <label>Password:</label>
             <input type="password" id="form-password" className="form-content" name="fpassword" placeholder="Password"></input>
           </div>
-          <button type="submit" className="button">Sign In</button>
+          <button type="submit" className="button">Sign Up</button>
         </form>
       </main>
     </div>

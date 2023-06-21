@@ -26,6 +26,10 @@
   display: flex;
   align-items: center;
 }
+.hero h1, .hero p {
+  background-color: var(--orange);
+  color: var(--white);
+}
 
 .hero-image {
   background-image: url('../../../public/hero.jpg');
