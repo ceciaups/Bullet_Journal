@@ -23,7 +23,7 @@ export default function Journal(props) {
   useEffect (() => {
     async function getSpread() {
       if (!props.user) {
-        navigate("/login")
+        // navigate("/login")
       }
       if (Object.keys(spread).length === 0) {}
       else if (spread.spread_type_id.spread_type_name === "Yearly Log") {
@@ -122,11 +122,11 @@ export default function Journal(props) {
   async function addItem(e) {
     e.preventDefault();
 
-    console.log(item);
     const option = {
       method: "POST",
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
+        "id": id,
         "spreadId": spread._id,
         "month": e.target.fmonth.value,
         "day": e.target.fday.value,
@@ -135,7 +135,13 @@ export default function Journal(props) {
       })
     }
 
-    const res = await fetch("https://bullet-journal-db.ceciaups.com/yearspread/add", option)
+    var res;
+    if (id) {
+      res = await fetch("https://bullet-journal-db.ceciaups.com/yearspread/edit", option)
+    }
+    else {
+      res = await fetch("https://bullet-journal-db.ceciaups.com/yearspread/add", option)
+    }
     const result = await res.json();
 
     if (res.status === 200){
@@ -152,30 +158,25 @@ export default function Journal(props) {
     }
   }
 
-  async function updateItem(e) {
-    e.preventDefault()
+  async function deleteItem(e) {
+    e.preventDefault();
 
-    const option = {
-      method: "POST",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        "spreadId": id,
-        "month": e.target.fmonth.value,
-        "day": e.target.fday.value,
-        "description": e.target.fdes.value,
-        "order": 1
-      })
-    }
+    if (id) {
+      const res = await fetch("https://bullet-journal-db.ceciaups.com/yearspread/delete?id=" + id);
+      const result = await res.json();
 
-    // const res = await fetch("https://bullet-journal-db.ceciaups.com/yearspread/add", option)
-    const res = await fetch("https://bullet-journal-db.ceciaups.com/yearspread/add", option)
-    const result = await res.json();
-
-    if (res.status === 200){
-      deactivatePanel();
-    }
-    else {
-      navigate("/error")
+      if (res.status === 200){
+        const res = await fetch("https://bullet-journal-db.ceciaups.com/yearspread?id=" + spread._id);
+        const result = await res.json();
+        if (res.status === 200){
+          setItems(result);
+        }
+        setId("");
+        deactivatePanel();
+      }
+      else {
+        navigate("/error")
+      }
     }
   }
 
@@ -189,14 +190,15 @@ export default function Journal(props) {
         <form action="#" id="form-year" name="form-year" onSubmit={(e) => addItem(e)}>
           <div className="form-input">
             <label>Month:</label>
-            <input type="number" id="form-month" className="form-content" name="fmonth" min={1} max={12} value={item.month}></input>
+            <input type="number" id="form-month" className="form-content" name="fmonth" min={1} max={12}></input>
             <label>Day:</label>
-            <input type="number" id="form-day" className="form-content" name="fday" min={1} max={31} value={item.day}></input>
+            <input type="number" id="form-day" className="form-content" name="fday" min={1} max={31}></input>
             <label>Description:</label>
-            <input type="text" id="form-des" className="form-content" name="fdes" value={item.description}></input>
+            <input type="text" id="form-des" className="form-content" name="fdes"></input>
           </div>
           <div className="form-button">
-            <button type="submit" className="button">{item ? "Update" : "Add"}</button>
+            <button type="submit" className="button">{id ? "Update" : "Add"}</button>
+            {id ? <button type="reset" className="button" onClick={(e) => deleteItem(e)}>Delete</button> : ""}
             <button type="reset" className="button" onClick={() => deactivatePanel()}>Cancel</button>
           </div>
         </form>
