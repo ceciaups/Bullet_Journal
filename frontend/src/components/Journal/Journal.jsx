@@ -23,7 +23,7 @@ export default function Journal(props) {
   useEffect (() => {
     async function getSpread() {
       if (!props.user) {
-        // navigate("/login")
+        navigate("/login")
       }
       if (Object.keys(spread).length === 0) {}
       else if (spread.spread_type_id.spread_type_name === "Yearly Log") {
