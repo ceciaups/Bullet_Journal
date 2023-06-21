@@ -10,18 +10,18 @@ router.get("/", async (req, res, next) => {
 });
 
 router.post("/add", async (req, res, next) => {
-  await addSpreadType(req, res, next);
-  res.send("Spread Type added successfully!");
+  result = await addSpreadType(req, res, next);
+  res.send(result);
 });
 
 router.post("/edit", async (req, res, next) => {
-  await editSpreadType(req, res, next);
-  res.send("Spread Type edited successfully!");
+  result = await editSpreadType(req, res, next);
+  res.send(result);
 });
 
 router.get("/delete", async (req, res, next) => {
-  await deleteSpreadType(req, res, next);
-  res.send("Spread Type deleted successfully!");
+  result = await deleteSpreadType(req, res, next);
+  res.send(result);
 });
 
 module.exports = router;

@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const Spread = require("../model/Spread");
-const { getSpread, addSpread, editSpread, deleteSpread } = require('../controller/SpreadController');
+const { getSpread, getSpreadsByUser, addSpread, editSpread, deleteSpread } = require('../controller/SpreadController');
 
 // Spread
 router.get("/", async (req, res, next) => {
@@ -9,19 +9,24 @@ router.get("/", async (req, res, next) => {
   res.send(result);
 });
 
+router.get("/all", async (req, res, next) => {
+  result = await getSpreadsByUser(req, res, next);
+  res.send(result);
+});
+
 router.post("/add", async (req, res, next) => {
-  await addSpread(req, res, next);
-  res.send("Spread added successfully!");
+  result = await addSpread(req, res, next);
+  res.send(result);
 });
 
 router.post("/edit", async (req, res, next) => {
-  await editSpread(req, res, next);
-  res.send("Spread edited successfully!");
+  result = await editSpread(req, res, next);
+  res.send(result);
 });
 
 router.get("/delete", async (req, res, next) => {
-  await deleteSpread(req, res, next);
-  res.send("Spread deleted successfully!");
+  result = await deleteSpread(req, res, next);
+  res.send(result);
 });
 
 module.exports = router;

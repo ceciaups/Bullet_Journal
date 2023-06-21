@@ -12,13 +12,14 @@ const User = require('../model/User');
 const Journal = require('../model/Journal');
 const Spread = require('../model/Spread');
 const SpreadType = require('../model/SpreadType');
+const YearSpread = require('../model/YearSpread');
 
 const app = express();
 app.use(express.json());
 app.use(express.static(__dirname + "/../"));
 app.use(
   cors({
-    origin: "https://bullet-journal.ceciaups.com"
+    origin: "https://bullet-journal.ceciaups.com/user"
   })
 );
 
@@ -26,6 +27,7 @@ app.use("/user", require("../route/user"));
 app.use("/journal", require("../route/journal"));
 app.use("/spread", require("../route/spread"));
 app.use("/spreadtype", require("../route/spreadtype"));
+app.use("/yearspread", require("../route/yearspread"));
 
 const httpServer = http.createServer(app);
 

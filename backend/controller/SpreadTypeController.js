@@ -17,8 +17,10 @@ async function getSpreadType(req, res, next) {
 async function addSpreadType(req, res, next) {
   try {
     let name = req.body.name;
+    let icon = req.body.icon;
     let data = {
-      spread_type_name: name
+      spread_type_name: name,
+      spread_type_icon: icon
     };
     return await SpreadType.create(data);
   }
@@ -31,11 +33,13 @@ async function editSpreadType(req, res, next) {
   try {
     let id = req.body.id;
     let name = req.body.name;
+    let icon = req.body.icon;
     let filter = {
       _id: id
     }
     let data = {
-      spread_type_name: name
+      spread_type_name: name,
+      spread_type_icon: icon
     };
     return await SpreadType.updateOne(filter, data);
   }

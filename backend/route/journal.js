@@ -10,13 +10,13 @@ router.get("/", async (req, res, next) => {
 });
 
 router.post("/add", async (req, res, next) => {
-  await addJournal(req, res, next);
-  res.send("Journal added successfully!");
+  result = await addJournal(req, res, next);
+  res.send(result);
 });
 
 router.get("/delete", async (req, res, next) => {
-  await deleteJournal(req, res, next);
-  res.send("Journal deleted successfully!");
+  result = await deleteJournal(req, res, next);
+  res.send(result);
 });
 
 module.exports = router;

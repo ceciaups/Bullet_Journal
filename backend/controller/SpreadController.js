@@ -14,6 +14,21 @@ async function getSpread(req, res, next) {
   }
 }
 
+async function getSpreadsByUser(req, res, next) {
+  try {
+    let id = req.query.id;
+    let data = {
+      journal_id: id
+    }
+    let result = await Spread.find(data).populate("spread_type_id").exec();
+    console.log(result);
+    return result;
+  }
+  catch (e) {
+    next(e);
+  }
+}
+
 async function addSpread(req, res, next) {
   try {
     let spreadTypeId = req.body.spreadTypeId;
@@ -71,6 +86,7 @@ async function deleteSpread(req, res, next) {
 
 module.exports = {
   getSpread,
+  getSpreadsByUser,
   addSpread,
   editSpread,
   deleteSpread
